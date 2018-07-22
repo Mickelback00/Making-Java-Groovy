@@ -4,17 +4,17 @@ import spock.lang.Ignore;
 import spock.lang.Specification;
 
 class ListSpec extends Specification {
-    def strings
+    List strings
     
     def setup() {
-        strings = ['this','is','a','list','of','strings']
+        strings = ['light', 'light', 'light', 'light']
     }
 
-    def "there are six strings"() {
-        expect: strings.size() == 6
+    def "there are four lights"() {
+        expect: strings.size() == 4
     }
     
-    def "add a string"() {
+    def "add two strings string"() {
         when:
         strings << "plus"
         strings << "two"
@@ -29,22 +29,22 @@ class ListSpec extends Specification {
         empty << 'data'
         
         then:
-        thrown(NullPointerException)
+        def e = thrown(NullPointerException)
+        //NullPointerException e = thrown()
+        println e.message
     }
     
-    def 'no exception if I stay inside string'() {
+    def 'no exception using the getAt method'() {
         when:
         (0..5).each { strings[it] }
+        strings[6]
         
         then:
         notThrown()
     }
     
-    def "list is still the same"() {
-        when:
-        def newList = strings - 'this' + 'stuff'
-        
-        then:
-        newList.size() == 6
+    def "There Are Four Lights!"() {
+        expect:
+        strings.findAll { it ==~ /light/ }.size() == 4
     }
 }

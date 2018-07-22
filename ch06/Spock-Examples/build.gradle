@@ -1,15 +1,16 @@
 apply plugin: "groovy"
 apply plugin: "eclipse"
+apply plugin: 'idea'
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    compile "org.codehaus.groovy:groovy-all:2.1.6"
-    testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+    compile "org.codehaus.groovy:groovy-all:2.4.3"
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
 }
 
 task wrapper(type: Wrapper) { 
-    gradleVersion = "1.6" 
+    gradleVersion = "2.3" 
 }

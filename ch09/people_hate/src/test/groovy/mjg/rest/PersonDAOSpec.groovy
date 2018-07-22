@@ -21,9 +21,11 @@ class PersonDAOSpec extends Specification {
     }
 
     @Unroll
-    def 'findById returns #first #last with id #id'() {
-        expect:
+    def 'findById returns #first #last with id #id'(Integer id, String first, String last) {
+        when:
         Person p = dao.findById(id)
+
+        then:
         p.first == first
         p.last == last
 
@@ -32,6 +34,7 @@ class PersonDAOSpec extends Specification {
     }
 
     def 'insert and delete a new person'() {
+        given:
         Person taggart = new Person(first:'Peter Quincy', last:'Taggart')
  
         when:
@@ -46,6 +49,7 @@ class PersonDAOSpec extends Specification {
 
         then:
         dao.findAll().size() == old(dao.findAll().size()) - 1
+        !dao.findById(taggart.id)
     }
 
     def 'findByName returns correct person'() {

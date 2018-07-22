@@ -35,13 +35,13 @@ class AccountProcessorSpec extends Specification {
     def "processing test accounts should yield 3"() {
         given:
         def accounts = dao.findAllAccounts()
+        accountProcessor.setAccounts(accounts)
          
         when: 
         def result = accountProcessor.processAccounts()
         
         then:
-        result == 3.0
-        accounts.each { account ->
+        accountProcessor.getAccounts().every { account ->
              account.balance.toString().endsWith "9"   
         }
     }

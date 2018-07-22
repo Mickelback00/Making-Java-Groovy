@@ -1,0 +1,14 @@
+# Gradle
+.gradle
+.gradletasknamecache
+build
+
+# Eclipse
+.project
+.classpath
+.settings
+bin
+
+# Idea
+.idea
+out

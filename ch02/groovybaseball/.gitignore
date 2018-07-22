@@ -2,9 +2,15 @@
 .gradle
 .gradletasknamecache
 build
+classes
 
 # Eclipse
 .project
 .classpath
 .settings
 bin
+
+# Idea
+.idea/
+*.iml
+*.ipr

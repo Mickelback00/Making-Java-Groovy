@@ -7,7 +7,8 @@ import spock.lang.Unroll
 
 class PersonDAOSpec extends Specification {
     @Shared PersonDAO dao = JdbcPersonDAO.instance
-    @Shared Sql sql = Sql.newInstance(url:'jdbc:h2:db', driver:'org.h2.Driver')
+    @Shared Sql sql = Sql.newInstance(url:'jdbc:h2:db',
+            driver:'org.h2.Driver')
     
     def 'findAll returns all people'() {
         when:
@@ -18,12 +19,17 @@ class PersonDAOSpec extends Specification {
         ['Archer', 'Picard', 'Kirk', 'Sisko', 'Janeway'].every {
             people*.last.contains(it)
         }
+//		['Archer','Smith'].each {
+//			assert people.last.contains(it)
+//		}
     }
 
     @Unroll
-    def 'findById returns #first #last with id #id'() {
-        expect:
+    def 'findById returns #first #last with id #id'(Integer id, String first, String last) {
+        when:
         Person p = dao.findById(id)
+
+        then:
         p.first == first
         p.last == last
 
@@ -32,6 +38,7 @@ class PersonDAOSpec extends Specification {
     }
 
     def 'insert and delete a new person'() {
+        given:
         Person taggart = new Person(first:'Peter Quincy', last:'Taggart')
  
         when:

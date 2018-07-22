@@ -30,12 +30,16 @@ class StadiumLocationsSpec extends Specification {
     }
     
     @Unroll
-    def "#name: #lat and #lng in range"() {
+    def "#name: #lat and #lng in range"(String name, double lat, double lng) {
         expect:
         lat > 25 && lat < 48
         lng > -123 && lng < -71
         
         where:
         [name,lat,lng] << db.rows('select name,latitude,longitude from stadium')
+    }
+
+    def cleanupSpec() {
+        if (db) db.close()
     }
 }
